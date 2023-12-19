@@ -9,7 +9,6 @@
 #define INC_FREERTOS_PARAMETER_H_
 
 
-#define SIZE_OF_READ_DATA_QUE_ELEMENT  i
 
 
 #endif /* INC_FREERTOS_PARAMETER_H_ */

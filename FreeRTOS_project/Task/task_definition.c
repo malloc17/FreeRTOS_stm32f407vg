@@ -6,67 +6,62 @@
  */
 
 #include "task_definition.h"
+#include "portmacro.h"
+#include <stdio.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+#include "command_handler.h"
 
-/*void command_task_handler(void *param)
+void user_interface_task_handler(void *param)
 {
 	volatile uint32_t ulNotifiedValue;
-	uint8_t receive_data_buffer[SIZE_OF_READ_DATA_QUE];
-	uint8_t receive_data;
-	int i = 0;
+	uint8_t receive_data[LOG_MAX_COMMAND_LENGTH];
+
 	while(1)
 	{
 		xTaskNotifyWait(0, 0, &ulNotifiedValue, portMAX_DELAY);  // notify bekle
-		i = 0;
-		xQueueReceive(q_read_data,(void *)&receive_data,(TickType_t) 0);
-		while(receive_data != '\n' )
+		while(uxQueueMessagesWaiting(q_read_data) != 0)   // queue da ne kadar mesaj var?
 		{
-			receive_data_buffer[i++] = receive_data;
 			xQueueReceive(q_read_data,(void *)&receive_data,(TickType_t) 0);
+			ui_command_parser(receive_data);
 		}
-		receive_data_buffer[i] = '\0';
-		receive_data_buffer[--i] = '\n';  // \r yerie \n koyuldu
-
-		send_UART(receive_data_buffer, SIZE_OF_READ_DATA_QUE_ELEMENT);
 	}
-}*/
+}
 
 void command_task_handler(void *param)
 {
 	volatile uint32_t ulNotifiedValue;
-	//uint8_t receive_data_buffer[SIZE_OF_READ_DATA_QUE];
-	uint8_t receive_data[LOG_MAX_COMMAND_LENGTH];
-	int i = 0;
+	uint8_t receive_data[ESP8266_MAX_COMMAND_LENGTH];
+
 	while(1)
 	{
-		xTaskNotifyWait(0, 0, &ulNotifiedValue, portMAX_DELAY);  // notify bekle
-
-		while(uxQueueMessagesWaiting(q_read_data) != 0)   // queue da ne kadar mesaj var?
+		xTaskNotifyWait(0, 0, &ulNotifiedValue, portMAX_DELAY);  
+		while(uxQueueMessagesWaiting(esp8266_input_queue) != 0) 
 		{
-			xQueueReceive(q_read_data,(void *)&receive_data,(TickType_t) 0);
-
-			command_parser(receive_data);
-
-			//send_UART(receive_data, SIZE_OF_READ_DATA_QUE_ELEMENT);
+			xQueueReceive(esp8266_input_queue,(void *)&receive_data,(TickType_t) 0);
+			esp8266_command_handler(receive_data);
 		}
 	}
 }
+
 
 void GS_task_handler(void *param)
 {
 	uint8_t data_buffer[SIZE_OF_READ_DATA_QUE] = "SAMPIYON GS\n";
 	while(1)
 	{
-		send_UART(data_buffer, sizeof(data_buffer));
+		send_to_UART(data_buffer, sizeof(data_buffer));
 		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
-}
+}  
 
 void FB_task_handler(void *param)
 {
 	uint8_t data_buffer[SIZE_OF_READ_DATA_QUE] = "SAMPIYON FB\n";
 	while(1)
 	{
-		send_UART(data_buffer, sizeof(data_buffer));
+		send_to_UART(data_buffer, sizeof(data_buffer));
 		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }

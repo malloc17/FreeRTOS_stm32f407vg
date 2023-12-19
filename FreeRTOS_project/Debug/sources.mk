@@ -22,6 +22,8 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 Drivers/STM32F4xx_HAL_Driver/Src \
+Esp8266 \
+Handler \
 Logs \
 Task \
 Uif \

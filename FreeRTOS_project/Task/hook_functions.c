@@ -6,6 +6,7 @@
  */
 
 #include "hook_functions.h"
+#include "main.h"
 
 void vApplicationIdleHook()
 {

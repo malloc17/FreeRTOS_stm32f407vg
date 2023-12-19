@@ -48,7 +48,7 @@
 #endif
 
 #define configUSE_PREEMPTION			1
-#define configUSE_IDLE_HOOK				1 //BY:
+#define configUSE_IDLE_HOOK				1  //BY:
 #define configUSE_TICK_HOOK				0  //BY:
 #define configCPU_CLOCK_HZ				( SystemCoreClock )
 #define configTICK_RATE_HZ				( ( TickType_t ) 100 )
@@ -119,8 +119,8 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 	
 /* Normal assert() semantics without relying on the provision of an assert.h
 header file. */
+
 #define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }	
-	
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS
 standard names. */
 #define vPortSVCHandler SVC_Handler

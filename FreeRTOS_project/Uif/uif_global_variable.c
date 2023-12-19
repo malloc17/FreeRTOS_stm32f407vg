@@ -6,5 +6,6 @@
  */
 
 #include "uif_global_variable.h"
+#include "uif_command.h"
 
 //struct uif_command_s 	uif_command;

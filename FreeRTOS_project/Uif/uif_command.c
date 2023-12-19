@@ -5,6 +5,7 @@
  *      Author: Burak
  */
 #include "uif_command.h"
+#include <string.h>
 
 const char *uif_command_table[] =
 {
@@ -12,7 +13,7 @@ const char *uif_command_table[] =
 		"EMPTY"
 };
 
-void command_parser(uint8_t * command)
+void ui_command_parser(uint8_t * command)
 {
 	int i = 0;
 	while(command[i++] != '\n');
@@ -21,7 +22,7 @@ void command_parser(uint8_t * command)
 
 	tokenize_command(&uif_command, (const uint8_t *)command);
 
-	add_null_char_to_end_of_arr(&uif_command);
+	add_null_char(&uif_command);
 
 	enum command_enum command_val = find_command(uif_command);
 
@@ -46,7 +47,7 @@ void tokenize_command(struct uif_command_s * uif_command, const uint8_t * comman
 	strncpy(uif_command->data, token_of_command, sizeof(uif_command->data));
 }
 
-void add_null_char_to_end_of_arr(struct uif_command_s * uif_command)
+void add_null_char(struct uif_command_s * uif_command)
 {
 	uif_command->command[COMMAND_SIZE_IN_COMMAND_WORD - 1] = '\0';
 	uif_command->data[DATA_SIZE_IN_COMMAND_WORD - 1] = '\0';

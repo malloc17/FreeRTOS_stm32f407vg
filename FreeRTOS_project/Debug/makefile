@@ -18,6 +18,8 @@ RM := rm -rf
 -include Uif/subdir.mk
 -include Task/subdir.mk
 -include Logs/subdir.mk
+-include Handler/subdir.mk
+-include Esp8266/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk

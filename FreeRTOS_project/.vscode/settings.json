@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "task_definition.h": "c",
+        "handler_global_val.h": "c",
+        "stdint.h": "c",
+        "access_modifiers.h": "c"
+    }
+}

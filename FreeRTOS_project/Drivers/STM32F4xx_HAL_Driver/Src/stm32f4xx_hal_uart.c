@@ -3039,7 +3039,14 @@ static HAL_StatusTypeDef UART_Receive_IT(UART_HandleTypeDef *huart)
       huart->RxCpltCallback(huart);
 #else
       /*Call legacy weak Rx complete callback*/
-      HAL_UART_RxCpltCallback(huart);
+      if(huart->Instance == UART4)                     /*BY*/
+    	  receive_from_esp8266_IT(huart);
+      else if (huart->Instance == USART2)
+    	  HAL_UART_RxCpltCallback_USB(huart);
+    	 // HAL_UART_RxCpltCallback_USB(huart);
+      else
+    	  HAL_UART_RxCpltCallback(huart);
+
 #endif /* USE_HAL_UART_REGISTER_CALLBACKS */
 
       return HAL_OK;

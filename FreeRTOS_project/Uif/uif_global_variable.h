@@ -8,6 +8,6 @@
 #ifndef UIF_GLOBAL_VARIABLE_H_
 #define UIF_GLOBAL_VARIABLE_H_
 
-#include "uif_command.h"
+
 
 #endif /* UIF_GLOBAL_VARIABLE_H_ */

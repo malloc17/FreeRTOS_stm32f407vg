@@ -10,7 +10,7 @@
 
 struct log_type_s {
     char log_name[10];
-    int * add_of_value;
+    int * value;
 };
 
 #endif /* LOG_GLOBAL_VAR_H_ */
