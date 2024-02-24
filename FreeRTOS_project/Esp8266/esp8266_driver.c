@@ -148,8 +148,8 @@ PRIVATE void set_network_name_and_password()
   strcpy((char *) espBuff,esp8266_command_table[SET_NETWORK_NAME_PASSWORD_COMMAND]);
   uint8_t cmdBuff[40] = {0};
 
-  const char MY_NETWORK_NAME[]= "FreeRTOS_UGUR_UNAL";
-  const char MY_NETWORK_PASSWORD[] =  "Naber7816";
+  const char MY_NETWORK_NAME[]= "FreeRTOS_---------";
+  const char MY_NETWORK_PASSWORD[] =  "--------";
 
   (void) sprintf((char *)cmdBuff, "\"%s\",\"%s\",5,4\r\n",MY_NETWORK_NAME,MY_NETWORK_PASSWORD);
   (void) strcat((char *) espBuff, (const char *) cmdBuff);
@@ -173,8 +173,8 @@ PRIVATE void connect_to_AP()
   strcpy((char *) espBuff,esp8266_command_table[CONNECT_TO_AP_COMMAND]);
   uint8_t cmdBuff[40] = {0};
 
-  const char MY_WIFI_NAME[]= "FiberHGW_TP67EA_2.4GHz"; //"TTNET_ZyXEL_V4P9";
-  const char PASSWORD[] = "MgN4juXH";  // "4C6FcB7B29454";
+  const char MY_WIFI_NAME[]= ------------;
+  const char PASSWORD[] = -------------;
 
   (void) sprintf((char *)cmdBuff, "\"%s\",\"%s\"\r\n",MY_WIFI_NAME,PASSWORD);
   (void) strcat((char *)espBuff, (const char *) cmdBuff);
